@@ -180,9 +180,7 @@ alan</td>
                                                                          
                                                                   
                                                                             
-                                                                 <br>
-                                                                <br>
-                                                                <br>
+                                                                
                                                             </div>
                         
                         
@@ -368,19 +366,28 @@ taşıyıcı kısmının tamamının tasarımında kullanılabilir.</td>
                     
     
                
-                    
+                    var brrkontrol=document.getElementById("brr");
                     var birimsec=parseFloat(document.getElementById("birimsec").value);
                     var brr=parseFloat(document.getElementById("brr").value);
                     
-                    if (birimsec==0) {
+                    
+                    
+                    if (brrkontrol.value.length != 0 && birimsec==0) {
                         document.getElementById("birimsonuc").value=(brr/3.6).toFixed(2);
                         
                     }
                     
-                    else if (birimsec==1) {
+                    else if (brrkontrol.value.length != 0 && birimsec==1) {
                         document.getElementById("birimsonuc").value=(brr*3.6).toFixed(2);
                     }
                     
+                    else if (brrkontrol.value.length == 0 && birimsec==1) {
+                        document.getElementById("birimsonuc").value="Lütfen Bir Değer Giriniz!";
+                    }
+                    
+                    else if (brrkontrol.value.length == 0 && birimsec==0) {
+                        document.getElementById("birimsonuc").value="Lütfen Bir Değer Giriniz!";
+                    }
                     
                 }
             
