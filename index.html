@@ -21,7 +21,8 @@
 <script src="jquery-3.3.1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
       
-        <style>.container {font-size:14px;}</style>
+        <style>.container {font-size:14px;}
+            .btn-xs {padding:2px; font-size:12px;}</style>
         
         
     </head>
@@ -95,15 +96,15 @@
                                                                 <tbody>
                                                               <tr>
                                                             <td>
-                                                                   <select id="birimsec" class="custom-select">
-                                                                        <option value="0">km/sa --> m/sn</option>
-                                                                        <option value="1">m/sn  --> km/h</option>
+                                                                   <select id="birimsec" class="custom-select custom-select-sm">
+                                                                        <option value="0">km/sa&nbsp&nbsp&nbsp==>&nbsp&nbsp&nbsp m/sn</option>
+                                                                        <option value="1">m/sn&nbsp&nbsp&nbsp&nbsp==>&nbsp&nbsp&nbsp km/h</option>
                                                                         </select>
                                                                   </td>
                                                             </tr>
 
                                                                               <tr>
-                                                            <td><input id="brr" min="0" type="number" value=""></td>
+                                                            <td><input style="text-align: center;" class="ml-auto mr-auto form-control  form-control-sm" id="brr" min="0" type="number" value=""></td>
                                                             </tr>
                                                                             
                                                                     
@@ -252,24 +253,24 @@ taşıyıcı kısmının tamamının tasarımında kullanılabilir.</td>
          <div class="container" style="margin-top:100px" id="asikform">
              <table class="table align-middle text-center">
                                                                 <tbody>
-             <tr><div class="row mt-3 mb-3">
+             <tr><div class="row mt-4 mb-4">
                 <div class="col text-left">
                     <b>Yapının Maksimum Yüksekliği (m)</b>
                 </div>
                 <div class="col" style="display: flex">
-                    <input type="number" class="form-control" value="" id="z" min="0">
+                    <input type="number" class="form-control-sm form-control" value="" id="z" min="0">
                        
                 </div>
             </div></tr>
              
-          <tr><div class="row mt-3 mb-3">
+          <tr><div class="row mt-4 mb-4">
                 <div class="col text-left">
                     <b>Esas Rüzgar Hızı (v<sub>b</sub>) (m/sn)</b>
                 </div>
                 <div class="col" style="display: flex">
-                    <input type="number" class="form-control" value="" id="vb" min="0">
+                    <input type="number" class="form-control form-control-sm" value="" id="vb" min="0">
                         <button 
-                                class="btn btn-outline-secondary info" 
+                                class="btn btn-outline-secondary info btn-xs" 
                                 type="button" 
                                 data-toggle="modal" 
                                 data-target="#popup-mskmh">?
@@ -277,12 +278,12 @@ taşıyıcı kısmının tamamının tasarımında kullanılabilir.</td>
                 </div>
             </div></tr>
              
-              <tr><div class="row mt-3 mb-3">
+              <tr><div class="row mt-4 mb-4">
                 <div class="col text-left">
                     <b>Arazi Kategorisi</b>
                 </div>
                 <div class="col" style="display: flex">
-                    <select id="arazikat" class="custom-select">
+                    <select id="arazikat" class="custom-select custom-select-sm">
                     <option value="0">0</option>
                     <option value="1">I</option>
                     <option value="2">II</option>
@@ -290,7 +291,7 @@ taşıyıcı kısmının tamamının tasarımında kullanılabilir.</td>
                     <option value="4">IV</option>
                     </select>
                     <button 
-                                class="btn btn-outline-secondary info" 
+                                class="btn btn-outline-secondary info btn-xs" 
                                 type="button" 
                                 data-toggle="modal" 
                                 data-target="#popup-arrazi">?
@@ -302,17 +303,17 @@ taşıyıcı kısmının tamamının tasarımında kullanılabilir.</td>
              
 
              
-             <tr><div class="row mt-3 mb-3">
+             <tr><div class="row mt-4 mb-4">
                 <div class="col text-left">
                     <b>Basınç Uygulanacak Alan</b>
                 </div>
                 <div class="col" style="display: flex">
-                    <select id="basalan" class="custom-select">
+                    <select id="basalan" class="custom-select custom-select-sm">
                     <option value="0">Cephe ve Çatı Kaplama Elemanları</option>
                     <option value="1">Yapı Taşıyıcı Sistemi</option>
                     </select>
                     <button 
-                                class="btn btn-outline-secondary info" 
+                                class="btn btn-outline-secondary info btn-xs" 
                                 type="button" 
                                 data-toggle="modal" 
                                 data-target="#popup-ccpp">?
@@ -320,12 +321,12 @@ taşıyıcı kısmının tamamının tasarımında kullanılabilir.</td>
                 </div>
              </div></tr>
              
-             <tr><div class="row mt-3 mb-3">
+             <tr><div class="row mt-4 mb-4">
                 <div class="col text-left">
                     <b>Yapının Rüzgar Yönüne Dik Uzunluğu (b) (m)</b>
                 </div>
                 <div class="col" style="display: flex">
-                    <input type="number" class="form-control" value="" id="bb" min="0">
+                    <input type="number" class="form-control  form-control-sm" value="" id="bb" min="0">
                         
                 </div>
             </div></tr>
@@ -335,7 +336,7 @@ taşıyıcı kısmının tamamının tasarımında kullanılabilir.</td>
                     <b>Yapının Rüzgar Yönüne Paralel Uzunluğu (d) (m)</b>
                 </div>
                 <div class="col" style="display: flex">
-                    <input type="number" class="form-control" value="" id="dd" min="0">
+                    <input type="number" class="form-control  form-control-sm" value="" id="dd" min="0">
                        
                 </div>
             </div></tr>
