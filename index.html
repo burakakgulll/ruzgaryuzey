@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="tr">
+    
+    
+    
+    
+    
+    
+    
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <link rel="stylesheet" type="text/css" href="css/fontawesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+      
+        
+        
+        
+    </head>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <title>
+        Yapı Yüzeyine Etkiyen Rüzgar Yükleri 
+    </title>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <body>
+        
+        <!-- NAVIGATION BAR -->
+        <br>
+        <div class="container">
+            <nav class="navbar nav-pills navbar-expand-md fixed-top">
+                
+                        
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarnav" aria-controls="navbarnav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button> 
+                        
+                    <div class="collapse navbar-collapse mt-3 mt-sm-3 mt-md-auto justify-content-center" id="navbarnav">
+                        <ul class="navbar-nav style-3" style=>
+                            <li class="nav-item">
+                                <a  data-toggle="tab" class="nav-link pl-md-3 pr-md-3" href="#">Yapı Yüzeyine Etkiyen Rüzgar Yükleri </a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </nav>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- POPUPS -->
+        
+        <div class="modal fade align-middle" id="popup-mskmh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog align-middle" role="document">
+                <div class="modal-content align-middle">
+                    <div class="modal-body align-middle mr-2 ml-2">
+                       
+                                                                        <div class="container align-middle">
+                                                                <table class="table align-middle text-center">
+                                                                <tbody>
+                                                              <tr>
+                                                            <td>
+                                                                   <select id="birimsec" class="custom-select">
+                                                                        <option value="0">km/sa --> m/sn</option>
+                                                                        <option value="1">m/sn  --> km/h</option>
+                                                                        </select>
+                                                                  </td>
+                                                            </tr>
+
+                                                                              <tr>
+                                                            <td><input id="brr" min="0" type="number" value=""></td>
+                                                            </tr>
+                                                                            
+                                                                    
+                                                                    <tr><td class="align-middle mx-auto">
+                                                                        <button type="button" class="btn btn-secondary mx-auto" onclick="mskmh()">Çevir</button></td>
+                                                                    </tr>
+                                                                    
+                                                                     <tr><td class="align-middle mx-auto">
+                                                                        <br><br><output id="birimsonuc" readonly=""></output></td>
+                                                                    </tr>
+                                                                                                                                        
+                                                                    
+                                                                    </tbody></table>
+                                                                         
+                                                                  
+                                                                            
+                                                                 <br>
+                                                                <br>
+                                                                <br>
+                                                            </div>
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+          <div class="modal fade align-middle" id="popup-arrazi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog align-middle" role="document">
+                <div class="modal-content align-middle">
+                    <div class="modal-body align-middle">
+                       
+                                                                        <div class="container align-middle">
+                                                                <table class="table align-middle text-center">
+                                                                <tbody>
+                                                                    <tr>
+                                                                    <td id="on">0</td>
+                                                                    <td id="off2">Açık deniz etkisine maruz deniz veya kıyı alanı</td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                    <td id="on">I</td>
+                                                                    <td id="off2">Göller veya ihmal edilebilecek seviyede bitki örtüsü olan ve engebeli
+olmayan düz ve yatay alan</td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                    <td id="on">II</td>
+                                                                    <td id="off2">Çayır gibi az seviyede bitki örtüsü olan ve aralarında en az engel
+yüksekliğinin 20 katı kadar mesafe bulunan engellere (ağaçlar, binalar)
+sahip alan</td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                    <td id="on">III</td>
+                                                                    <td id="off2">Düzgün yayılı şekilde bir bitki örtüsüne veya binalara veya aralarında en
+az engel yüksekliğinin 20 katı kadar mesafe bulunan engellere sahip alan
+(kasabalar, yörekent, ormanlık alan gibi)</td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                    <td id="on">IV</td>
+                                                                    <td id="off2">Yüzeyinin en az % 15’i, yükseklik ortalaması 15 m’yi aşan binalarla kaplı
+alan</td>
+                                                                    </tr>
+
+                                                                    
+                                                                    </tbody></table>
+                                                                         
+                                                                  
+                                                                            
+                                                                 <br>
+                                                                <br>
+                                                                <br>
+                                                            </div>
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+ 
+        <div class="modal fade align-middle" id="popup-ccpp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog align-middle" role="document">
+                <div class="modal-content align-middle">
+                    <div class="modal-body align-middle">
+                       
+                                                                        <div class="container align-middle">
+                                                                <table class="table align-middle text-center">
+                                                                <tbody>
+                                                                    <tr>
+                                                                    <td id="on">cpe,1 değerleri cephe ve çatı kaplama elemanları gibi alanı 1 m2 veya daha az olan küçük elemanlar
+ve sabitleme elemanlarının tasarımında kullanılmak üzere dikkate alınır. cpe,10 değerleri binanın yük
+taşıyıcı kısmının tamamının tasarımında kullanılabilir.</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    <td id="on">Kaynak : TS EN 1991-1-4    7.2.1 Not 1</td>
+                                                                    </tr>
+                                     
+
+                                                                    
+                                                                    </tbody></table>
+                                                                         
+                                                                  
+                                                                            
+                                                                 <br>
+                                                                <br>
+                                                                <br>
+                                                            </div>
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--MAIN PAGE CONTENTS -->
+        
+        <div class="container align-middle text-center" style="margin-top:100px">
+            <table class="table align-middle text-center"><tbody>
+                <tr><img src="img/ruzgarplan.png"></tr>
+                <tr><br><br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="img/ruzgarkesit.png"></tr>
+                
+            </tbody></table>
+        </div>
+        
+        
+         <div class="container" style="margin-top:100px" id="asikform">
+             
+             <div class="row mt-3 mb-3">
+                <div class="col text-left">
+                    <b>Yapının Maksimum Yüksekliği (m)</b>
+                </div>
+                <div class="col" style="display: flex">
+                    <input type="number" class="form-control" value="" id="z" min="0">
+                       
+                </div>
+            </div>
+             
+          <div class="row mt-3 mb-3">
+                <div class="col text-left">
+                    <b>Esas Rüzgar Hızı (v<sub>b</sub>) (m/sn)</b>
+                </div>
+                <div class="col" style="display: flex">
+                    <input type="number" class="form-control" value="" id="vb" min="0">
+                        <button 
+                                class="btn btn-outline-secondary info" 
+                                type="button" 
+                                data-toggle="modal" 
+                                data-target="#popup-mskmh">?
+                        </button>
+                </div>
+            </div>
+             
+              <div class="row mt-3 mb-3">
+                <div class="col text-left">
+                    <b>Arazi Kategorisi</b>
+                </div>
+                <div class="col" style="display: flex">
+                    <select id="arazikat" class="custom-select">
+                    <option value="0">0</option>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                    </select>
+                    <button 
+                                class="btn btn-outline-secondary info" 
+                                type="button" 
+                                data-toggle="modal" 
+                                data-target="#popup-arrazi">?
+                        </button>
+                </div>
+             </div>
+             
+             
+             
+
+             
+             <div class="row mt-3 mb-3">
+                <div class="col text-left">
+                    <b>Basınç Uygulanacak Alan</b>
+                </div>
+                <div class="col" style="display: flex">
+                    <select id="basalan" class="custom-select">
+                    <option value="0">Cephe ve Çatı Kaplama Elemanları</option>
+                    <option value="1">Yapı Taşıyıcı Sistemi</option>
+                    </select>
+                    <button 
+                                class="btn btn-outline-secondary info" 
+                                type="button" 
+                                data-toggle="modal" 
+                                data-target="#popup-ccpp">?
+                        </button>
+                </div>
+             </div>
+             
+             <div class="row mt-3 mb-3">
+                <div class="col text-left">
+                    <b>Yapının Rüzgar Yönüne Dik Uzunluğu (b) (m)</b>
+                </div>
+                <div class="col" style="display: flex">
+                    <input type="number" class="form-control" value="" id="bb" min="0">
+                        
+                </div>
+            </div>
+             
+             <div class="row mt-3 mb-3">
+                <div class="col text-left">
+                    <b>Yapının Rüzgar Yönüne Paralel Uzunluğu (d) (m)</b>
+                </div>
+                <div class="col" style="display: flex">
+                    <input type="number" class="form-control" value="" id="dd" min="0">
+                       
+                </div>
+            </div>
+             
+             
+             
+        
+         </div>
+        
+        
+        
+        
+        
+        
+        <!-- BUTTON -->
+        
+        <div class="container">
+            <div style="text-align:center;" class="row">
+                <div class="col mt-3 mb-4">
+                    <button onclick="hesaplar()" class="btn btn-outline-danger" id="butonasik">Hesapla</button>
+                    </div>
+            </div>
+        </div>
+
+
+        
+        <script language="javascript">
+                function mskmh(){
+                    
+    
+               
+                    
+                    var birimsec=parseFloat(document.getElementById("birimsec").value);
+                    var brr=parseFloat(document.getElementById("brr").value);
+                    
+                    if (birimsec==0) {
+                        document.getElementById("birimsonuc").value=(brr/3.6).toFixed(2);
+                        
+                    }
+                    
+                    else if (birimsec==1) {
+                        document.getElementById("birimsonuc").value=(brr*3.6).toFixed(2);
+                    }
+                    
+                    
+                }
+            
+        </script>
+        
+         
+        
+        
+        
+        
+        <script language="javascript">
+                function hesaplar(){
+
+
+                // matrisler
+
+                var z00=[0.003,0.01,0.05,0.3,1];
+                var	zminn=[1,1,2,5,10];
+                
+               
+                    
+                    //Deger atamalari	
+                
+                var vbkontrol = document.getElementById('vb');    
+                var zkontrol = document.getElementById('z');    
+                var bbkontrol = document.getElementById('bb');    
+                var ddkontrol = document.getElementById('dd');    
+                    
+                var arazikat=parseFloat(document.getElementById("arazikat").value);
+                var vb=parseFloat(document.getElementById("vb").value);
+                var z=parseFloat(document.getElementById("z").value);
+                var bb=parseFloat(document.getElementById("bb").value);
+                var dd=parseFloat(document.getElementById("dd").value);
+                var cpe=parseFloat(document.getElementById("basalan").value);
+                
+                    if (vbkontrol.value.length == 0 || zkontrol.value.length == 0 || bbkontrol.value.length == 0 || ddkontrol.value.length == 0 ) {
+                        
+                document.getElementById("tepebas").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("vmm").value="Tüm Alanları Doldurunuz!";
+                    
+                document.getElementById("abolbas").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("bbolbas").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("cbolbas").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("dbolbas").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("ebolbas").value="Tüm Alanları Doldurunuz!";
+                    
+                document.getElementById("auz").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("buz").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("cuz").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("duz").value="Tüm Alanları Doldurunuz!";
+                document.getElementById("euz").value="Tüm Alanları Doldurunuz!";
+                    }
+                    
+                    else {
+                    
+                    
+                    
+                
+                    
+                 //matris cekimleri   
+                var z0=parseFloat(z00[arazikat]);
+                var zmin=parseFloat(zminn[arazikat]);
+               
+                
+             
+
+                
+
+                
+
+
+
+
+
+                //HESAPLAR
+                //Beton Ezilme Dayanımı
+
+                var kr=0.19*(Math.pow((z0/0.05),0.07));
+                if (z>=zmin) {
+                    
+                    var cr=kr*Math.log(z/z0);
+                }
+                    
+                else if (z<zmin) {
+                    
+                    var cr=kr*Math.log(zmin/z0);
+                }
+                    
+                    var c0=1;
+                    var vm=cr*vb*c0;
+                    
+                if (z>=zmin) {
+                    
+                    var lv=1/(Math.log(z/z0));
+                }
+                    
+                else if (z<zmin) {
+                    
+                    var lv=1/(Math.log(zmin/z0));
+                }
+                    
+                var qp=(1+7*lv)*0.5*1.25*vm*vm;
+                var tepbas=qp/9.8065;
+                    
+                var e=Math.min(bb,2*z);
+                    
+                if (e<dd) {
+                    
+                    var a=e*0.2;
+                    var b=e*0.8;
+                    var c=dd-e;
+                }
+                    
+                else if (e>=dd && e<(5*dd)) {
+                    
+                    var a=e*0.2;
+                    var b=dd-e*0.2;
+                    var c=0;
+                }
+                         
+                else if (e>=(5*dd)) {
+                    
+                    var a=dd;
+                    var b=0;
+                    var c=0;
+                }
+
+                    
+                    var hd=z/dd;
+                    
+                        var a10=-1.2;
+                        var a1=-1.4;
+                        var b10=-0.8;
+                        var b1=-1.1;
+                        var c10=-0.5;
+                        var c1=-0.5;
+                        var d10_5=0.8;
+                        var d1_5=1;
+                        var e10_5=-0.7;
+                        var e1_5=-0.7;
+                
+                        var d10_1=0.8;
+                        var d1_1=1;
+                        var e10_1=-0.5;
+                        var e1_1=-0.5;
+                        
+                        var d10_025=0.7;
+                        var d1_025=1;
+                        var e10_025=-0.3;
+                        var e1_025=-0.3;
+                    
+                    if (hd>=5) {
+                        
+                        var d10=0.8;
+                        var d1=1;
+                        var e10=-0.7;
+                        var e1=-0.7;
+                    }
+                    
+                    else if (hd<5 && hd>1) {
+                        
+                        var d10=0.8;
+                        var d1=1;
+                        var e10=(((hd-1)*(-0.2))/4)-0.5;
+                        var e1=(((hd-1)*(-0.2))/4)-0.5;
+                    }
+                    
+                    else if (hd==1) {
+                        
+                        var d10=0.8;
+                        var d1=1;
+                        var e10=-0.5;
+                        var e1=-0.5;
+                    }
+                    
+                    else if (hd>0.25 && hd<1) {
+                        
+                        var d10=(((hd-0.25)*(0.1))/0.75)+0.7;
+                        var d1=1;
+                        var e10=(((hd-0.25)*(-0.2))/0.75)-0.3;
+                        var e1=(((hd-0.25)*(-0.2))/0.75)-0.3;
+                    }
+                    
+                    else if (hd<=0.25) {
+                        var d10=0.7;
+                        var d1=1;
+                        var e10=-0.3;
+                        var e1=-0.3;
+                    }
+                    
+                    if (cpe==0) {
+                        var abs=a1;
+                        var bbs=b1;
+                        var cbs=c1;
+                        var dbs=d1;
+                        var ebs=e1;
+                        
+                    }
+                    
+                    else if (cpe==1) {
+                        var abs=a10;
+                        var bbs=b10;
+                        var cbs=c10;
+                        var dbs=d10;
+                        var ebs=e10;
+                    }
+                    
+                    var abas=tepbas*abs;
+                    var bbas=tepbas*bbs;
+                    var cbas=tepbas*cbs;
+                    var dbas=tepbas*dbs;
+                    var ebas=tepbas*ebs;
+                    
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    if (cpe==0) {ak=a1; bk=b1; ck=c1; dk=d1; ek=e1;}
+                    else if (cpe==1) {ak=a10; bk=b10; ck=c10; dk=d10; ek=e10;}
+                    
+                    
+                //Cikti ve Sartlar
+
+
+
+            
+                
+                document.getElementById("tepebas").value=tepbas.toFixed(1);
+                document.getElementById("vmm").value=vm.toFixed(1);
+                    
+                document.getElementById("abolbas").value=abas.toFixed(1);
+                document.getElementById("bbolbas").value=bbas.toFixed(1);
+                document.getElementById("cbolbas").value=cbas.toFixed(1);
+                document.getElementById("dbolbas").value=dbas.toFixed(1);
+                document.getElementById("ebolbas").value=ebas.toFixed(1);
+                    
+                document.getElementById("auz").value=a.toFixed(1);
+                document.getElementById("buz").value=b.toFixed(1);
+                document.getElementById("cuz").value=c.toFixed(1);
+                document.getElementById("duz").value=bb.toFixed(1);
+                document.getElementById("euz").value=bb.toFixed(1);
+               
+
+                    
+                    
+                    
+                    
+                    
+                }}
+
+                </script>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--RESULTS-->
+        <br>
+        <div class="container">
+            <div class="row" mt-4 mb-3>
+                <b class="h4" style="margin-left: auto; margin-right: auto;" style="color:darkred">SONUÇLAR</b>
+            </div>
+        </div>
+        <br>
+        <br>
+        
+      
+        
+        <div class="container">
+            <table class="table">
+            <tbody>
+          <tr>
+        <td id="on">Ortalama Rüzgar Hızı (m/sn)</td>
+        <td id="off2" colspan="2"><output id="vmm" readonly=""></output></td>
+        </tr>
+                
+                          <tr>
+        <td id="on">Tepe Rüzgar Basıncı (kg/m<sup>2</sup>)</td>
+        <td id="off2" colspan="2"><output id="tepebas" readonly=""></output></td>
+        </tr>
+           
+                </tbody></table>
+             <br>
+            <br>
+            <br>
+        </div>
+        
+
+        
+        <div class="container">
+
+
+        <table class="table text-center">
+
+        <tbody>
+<tr>
+        <td id="on"></td>
+        <td id="off2">Bölge Genişliği (m)</td>
+        <td id="off2">Bölge Basıncı (kg/m<sup>2</sup>)</td>
+        </tr>
+            
+
+            
+            <tr>  
+        <td id="on">A Bölgesi</td>
+        <td id="off2"><output id="auz" readonly=""></output></td>
+        <td id="off2"><output id="abolbas" readonly=""></output></td>
+        </tr>
+            
+            <tr>  
+        <td id="on">B Bölgesi</td>
+        <td id="off2"><output id="buz" readonly=""></output></td>
+        <td id="off2"><output id="bbolbas" readonly=""></output></td>
+        </tr>
+            
+            <tr>  
+        <td id="on">C Bölgesi</td>
+        <td id="off2"><output id="cuz" readonly=""></output></td>
+        <td id="off2"><output id="cbolbas" readonly=""></output></td>
+        </tr>
+            
+            <tr>  
+        <td id="on">D Bölgesi</td>
+        <td id="off2"><output id="duz" readonly=""></output></td>
+        <td id="off2"><output id="dbolbas" readonly=""></output></td>
+        </tr>
+            
+            <tr>  
+        <td id="on">E Bölgesi</td>
+        <td id="off2"><output id="euz" readonly=""></output></td>
+        <td id="off2"><output id="ebolbas" readonly=""></output></td>
+        </tr>
+
+        
+
+
+        </tbody></table>
+        <br><br><br>
+        
+            <table class="table text-center">
+
+        <tbody>
+<tr>
+        <td id="on"> Kaynak : TS EN 1991-1-4</td>
+
+        </tr>
+     
+
+        
+
+
+        </tbody></table>
+            <br><br>
+        
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap-tooltip.js"></script>
+        <script src="js/fontawesome.min.js"></script>
+        
+        </div>
+                
+        
+    </body>
+</html>
